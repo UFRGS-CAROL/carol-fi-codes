@@ -18,3 +18,23 @@ To install the suite execute the install script
 ```{r, engine='bash', code_block_name} 
 $ ./install.sh
 ```
+
+# Benchmarks info
+
+| Benchmark | Description | Reference |
+| ------------- | ------------- | ------------- |
+| lava_mp   | N-Body      | http://rodinia.cs.virginia.edu/doku.php |
+| bfs       | Graph       |                                         |
+| hotspot   | Structured Grid         |                                         | 
+| gaussian  |  Dense Linear Algebra   |                                         | 
+| lud       |  Dense Linear Algebra   |                                         | 
+| nw        |  Dynamic Programming    |                                         |
+| gemm_tensorcores | NVIDIA BLAS | NVIDIA Samples |
+| mergesort        |  Sorting    | NVIDIA Samples |
+| quicksort        |  Sorting    | NVIDIA Samples |
+| accl              |             | |
+| darknet_v2    | Machine learning | https://github.com/pjreddie/darknet |
+| darknet_v3    | Machine learning | https://github.com/pjreddie/darknet |
+ 
+ 
+   
