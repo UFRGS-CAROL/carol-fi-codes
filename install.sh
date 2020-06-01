@@ -13,7 +13,20 @@ do
 done
 
 # Download the input data
-echo "Download"
+echo "Downloading"
+
+#BFS
+cd data/bfs
+FILE=graphs_rodinia.tar.gz
+if [ -f "$FILE" ]; then
+    echo "$FILE exist"
+else 
+    wget https://github.com/UFRGS-CAROL/radiation-benchmarks/raw/master/data/bfs/${FILE}
+fi
+tar xzf graphs_rodinia.tar.gz
+cd -
+
+# hotspot
 
 
 make -C common/include/
