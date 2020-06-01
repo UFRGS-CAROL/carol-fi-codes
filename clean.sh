@@ -1,9 +1,11 @@
 #!/bin/bash
 
 set -x
-set -e
+#set -e
 
-for dir in lava_mp;
+benchmarks=( lava_mp gemm_tensorcores bfs accl mergesort quicksort hotspot gaussian lud nw )
+
+for dir in "${benchmarks[@]}";
 do
     rm -rf data/${dir}
     make -C ${dir}/ clean

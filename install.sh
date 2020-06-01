@@ -5,7 +5,9 @@ set -e
 
 mkdir -p data
 
-for dir in lava;
+benchmarks=( lava_mp gemm_tensorcores bfs accl mergesort quicksort hotspot gaussian lud nw )
+
+for dir in "${benchmarks[@]}";
 do
     mkdir -p data/${dir}
 done
