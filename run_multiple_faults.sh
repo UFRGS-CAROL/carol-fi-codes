@@ -15,6 +15,8 @@ conffiles=(
             ${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf
             ${cfc}/bfs/bfs.conf
             ${cfc}/accl/accl.conf
+            ${cfc}/mergesort/mergesort.conf
+            
             )
             
 cd ../

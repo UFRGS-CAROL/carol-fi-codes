@@ -15,7 +15,7 @@ done
 # Download the input data
 echo "Downloading"
 
-#BFS
+# BFS
 cd data/bfs
 FILE=graphs_rodinia.tar.gz
 if [ -f "$FILE" ]; then
