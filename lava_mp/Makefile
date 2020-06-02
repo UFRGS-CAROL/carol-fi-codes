@@ -1,6 +1,4 @@
-include ../common/common_make.mk
-
-#CXX=g++
+CXX=g++-7
 CXXFLAGS= -std=c++11 -o3  -fPIC -pthread 
 EXEC=cuda_lava
 
@@ -19,7 +17,7 @@ RELATIVEERROR=0
 
 
 VPATH=./src
-CUDAPATH=$(CUDA_PATH)
+CUDAPATH=/usr/local/cuda
 
 NVCC=$(CUDAPATH)/bin/nvcc
 NVCCFLAGS= -std=c++11 -O3 -Xptxas -v

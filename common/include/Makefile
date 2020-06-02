@@ -27,5 +27,5 @@ all: clean log_helper.c
 
 
 clean:
-	rm -rf $(LIBOUT) *.o *.a server
+	rm -rf $(LIBOUT) *.o *.a ../lib/*
 	make -C log_helper_swig_wraper/ clean
