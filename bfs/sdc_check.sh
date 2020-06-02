@@ -1,0 +1,1 @@
+../lava_mp/sdc_check.sh
