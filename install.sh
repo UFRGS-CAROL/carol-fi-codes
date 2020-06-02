@@ -26,6 +26,17 @@ fi
 tar xzf graphs_rodinia.tar.gz
 cd -
 
+# accl
+cd data/accl
+FILE=7Frames.pgm
+if [ -f "$FILE" ]; then
+    echo "$FILE exist"
+else 
+    wget https://github.com/UFRGS-CAROL/radiation-benchmarks/raw/master/data/accl/7Frames.pgm
+fi
+cd -
+
+
 # hotspot
 
 
