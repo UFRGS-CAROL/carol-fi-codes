@@ -8,7 +8,8 @@ set -e
 FAULTS=10
 
 
-benchmarks=( lava_mp gemm_tensorcores bfs accl mergesort quicksort hotspot gaussian lud nw )
+benchmarks=( lava_mp gemm_tensorcores bfs accl mergesort quicksort ) 
+# hotspot gaussian lud nw )
 cfc=carol-fi-codes
 conffiles=( 
             ${cfc}/lava_mp/float_dmr_none.conf
@@ -16,7 +17,7 @@ conffiles=(
             ${cfc}/bfs/bfs.conf
             ${cfc}/accl/accl.conf
             ${cfc}/mergesort/mergesort.conf
-            
+            ${cfc}/quicksort/quicksort.conf
             )
             
 cd ../
@@ -25,18 +26,16 @@ for((i = 0; i < ${#benchmarks[@]}; i++));
 do
     bench=${benchmarks[$i]}
     conf=${conffiles[$i]}
-    echo $bench
-    #echo $conf
-    ls $conf
-    #echo "Step 1 - Profiling the application for fault injection"
-    #./app_profiler.py -c ${CONFFILE}
+
+    echo "Step 1 - Profiling the application for fault injection"
+    ./app_profiler.py -c ${conf}
 
 
-    #echo "Step 2 - Running ${FAULTS} on ${CONFFILE}"
-    #./fault_injector.py -i ${FAULTS} -c ${CONFFILE}
+    echo "Step 2 - Running ${FAULTS} on ${CONFFILE}"
+    ./fault_injector.py -i ${FAULTS} -c ${conf}
 
-    #tar czf ${i}_carolfi_2k.tar.gz *.csv /var/radiation-benchmarks/log/
-    #rm -rf /var/radiation-benchmarks/log/*.log logs/* *.csv
+    tar czf ${bench}_carolfi_2k.tar.gz *.csv /var/radiation-benchmarks/log/
+    rm -rf /var/radiation-benchmarks/log/*.log logs/* *.csv
 done
 
 cd -

@@ -1,0 +1,72 @@
+CXX=g++-7
+CXXFLAGS= -std=c++11 -O3  -Xcompiler -fPIC  -Xcompiler  -pthread -Xcompiler -fopenmp
+EXEC=quicksort
+LOGS=1
+DEBUG=0
+SIZE=134217728
+
+VPATH=./
+CUDAPATH=/usr/local/cuda
+NVCC=$(CUDAPATH)/bin/nvcc
+
+
+NVCCFLAGS= -std=c++11 -O3 -Xptxas -v -rdc=true -Xcompiler -fopenmp
+
+
+ARCH= -gencode arch=compute_35,code=[sm_35,compute_35] #Kepler
+ARCH+= -gencode arch=compute_70,code=[sm_70,compute_70] #Titan V
+#ARCH+= -gencode arch=compute_72,code=[sm_72,compute_72] #XavierV 
+#-I$(CUDAPATH)/samples/common/inc
+INCLUDE= -I./src -I$(CUDAPATH)/include -I../common/include -I../common -I$(CUDAPATH)/samples/common/inc
+
+OBJDIR=./obj/
+OBJ= cdpBitonicSort.o cdpAdvancedQuicksort.o
+
+ifeq ($(DEBUG), 1) 
+CXXFLAGS+=-O0 -g
+NVCCFLAGS+= -g -G
+endif
+
+ifeq ($(LOGS), 1)
+CXXFLAGS+= -DLOGS
+NVCCFLAGS+= -DLOGS
+LDFLAGS+= -L../common/lib  -lLogHelper
+endif
+
+LDFLAGS+= -L$(CUDAPATH)/lib64  -lcudart  -lcurand
+
+OBJS = $(addprefix $(OBJDIR), $(OBJ))
+DEPS = $(wildcard src/*.h) Makefile
+
+
+all: mkdir $(EXEC)
+
+
+$(EXEC): $(OBJS)  
+	$(NVCC) $(ARCH) $^ -o $@ $(LDFLAGS) $(INCLUDE) $(CXXFLAGS)
+
+$(OBJDIR)%.o: %.cpp $(DEPS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INCLUDE)
+	
+$(OBJDIR)%.o: %.cu $(DEPS)
+	$(NVCC) $(ARCH) $(NVCCFLAGS) -c $< -o $@ $(INCLUDE) 
+
+mkdir:
+	mkdir -p $(OBJDIR)
+
+clean:
+	rm -f $(OBJDIR)* $(EXEC)
+	
+DATA=../data/quicksort
+	
+generate:
+	 ./$(EXEC) -size=$(SIZE) -generate -verbose \
+	 		   -input=$(DATA)/input_$(SIZE) \
+	 		   -gold=$(DATA)/gold_$(SIZE) \
+	 		   -iterations=1 -noinputensurance
+	 		   	
+test:
+	 ./$(EXEC) -size=$(SIZE) -verbose \
+	 		   -input=$(DATA)/input_$(SIZE) \
+	 		   -gold=$(DATA)/gold_$(SIZE) \
+	 		   -iterations=1 -noinputensurance
