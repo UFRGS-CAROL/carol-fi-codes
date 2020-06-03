@@ -17,6 +17,11 @@ conffiles=(
             ${cfc}/accl/accl.conf
             ${cfc}/mergesort/mergesort.conf
             ${cfc}/quicksort/quicksort.conf
+            ${cfc}/hotspot/single_hotspot.conf
+            ${cfc}/gaussian/gaussian.conf
+            ${cfc}/lud/lud.conf
+            ${cfc}/nw/nw.conf
+            
             )
             
 cd ../
