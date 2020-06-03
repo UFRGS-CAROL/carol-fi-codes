@@ -6,39 +6,37 @@ set -e
 #set -x
 
 FAULTS=10
-
-
-benchmarks=( lava_mp gemm_tensorcores bfs accl mergesort quicksort hotspot gaussian lud nw )
 cfc=carol-fi-codes
-conffiles=( 
-            ${cfc}/lava_mp/float_dmr_none.conf
-            ${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf
-            ${cfc}/bfs/bfs.conf
-            ${cfc}/accl/accl.conf
-            ${cfc}/mergesort/mergesort.conf
-            ${cfc}/quicksort/quicksort.conf
-            ${cfc}/hotspot/single_hotspot.conf
-            ${cfc}/gaussian/gaussian.conf
-            ${cfc}/lud/lud.conf
-            ${cfc}/nw/nw.conf
-            )
-            
+
+declare -A benchmarks=( 
+        ["lava_mp"]="${cfc}/lava_mp/float_dmr_none.conf"
+        ["gemm_tensorcores"]="${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf"
+        ["bfs"]="${cfc}/bfs/bfs.conf"
+        ["accl"]="${cfc}/accl/accl.conf"
+        ["mergesort"]="${cfc}/mergesort/mergesort.conf"
+        ["quicksort"]="${cfc}/quicksort/quicksort.conf"
+        ["hotspot"]="${cfc}/hotspot/single_hotspot.conf"
+        ["gaussian"]="${cfc}/gaussian/gaussian.conf"
+        ["lud"]="${cfc}/lud/lud.conf"
+        ["nw"]="${cfc}/nw/nw.conf"
+        )
+          
 cd ../
 
-for((i = 0; i < ${#benchmarks[@]}; i++));
+for bench in "${!benchmarks[@]}";
 do
-    bench=${benchmarks[$i]}
-    conf=${conffiles[$i]}
+    #bench=${benchmarks[$i]}
+    conf="${benchmarks[$bench]}"
 
-    echo "Step 1 - Profiling the application for fault injection"
+    echo "Step 1 - Profiling $bench for fault injection"
     ./app_profiler.py -c ${conf}
 
 
-    echo "Step 2 - Running ${FAULTS} on ${CONFFILE}"
-    ./fault_injector.py -i ${FAULTS} -c ${conf}
+    echo "Step 2 - Running ${FAULTS} on ${conf}"
+    #./fault_injector.py -i ${FAULTS} -c ${conf}
 
-    tar czf ${bench}_carolfi_2k.tar.gz *.csv /var/radiation-benchmarks/log/
-    rm -rf /var/radiation-benchmarks/log/*.log logs/* *.csv
+    #tar czf ${bench}_carolfi_2k.tar.gz *.csv /var/radiation-benchmarks/log/
+    #rm -rf /var/radiation-benchmarks/log/*.log logs/* *.csv
 done
 
 cd -
