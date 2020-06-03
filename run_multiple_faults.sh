@@ -21,7 +21,6 @@ conffiles=(
             ${cfc}/gaussian/gaussian.conf
             ${cfc}/lud/lud.conf
             ${cfc}/nw/nw.conf
-            
             )
             
 cd ../

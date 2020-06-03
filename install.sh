@@ -50,6 +50,13 @@ tar xzf $FILE
 
 cd -
 
+
+for dir in "${benchmarks[@]}";
+do
+    make -C ${dir} -j4
+    make -C ${dir} generate
+done
+
 make -C common/include/
 make -C common/include/log_helper_swig_wraper/
 
