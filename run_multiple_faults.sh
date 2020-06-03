@@ -8,8 +8,7 @@ set -e
 FAULTS=10
 
 
-benchmarks=( lava_mp gemm_tensorcores bfs accl mergesort quicksort ) 
-# hotspot gaussian lud nw )
+benchmarks=( lava_mp gemm_tensorcores bfs accl mergesort quicksort hotspot gaussian lud nw )
 cfc=carol-fi-codes
 conffiles=( 
             ${cfc}/lava_mp/float_dmr_none.conf
