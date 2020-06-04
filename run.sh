@@ -74,8 +74,11 @@ install(){
 
     for bench in "${!BENCHMARKS[@]}";
     do
-        make -C ${bench} -j4
-        make -C ${bench} generate
+        cd ${bench}
+        make clean
+        make -j4
+        make generate
+        cd -
     done
 }
 
