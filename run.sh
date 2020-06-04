@@ -67,7 +67,7 @@ install(){
 
     make -C common/include/
     
-    if ldconfig -p | grep -q lib;
+    if ldconfig -p | grep -q liblua;
     then
         make -C common/include/log_helper_swig_wraper/
     fi
