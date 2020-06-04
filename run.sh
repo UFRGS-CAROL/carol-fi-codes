@@ -66,7 +66,11 @@ install(){
     cd -
 
     make -C common/include/
-    make -C common/include/log_helper_swig_wraper/
+    
+    if ldconfig -p | grep -q lib;
+    then
+        make -C common/include/log_helper_swig_wraper/
+    fi
 
     for bench in "${!BENCHMARKS[@]}";
     do
