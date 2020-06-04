@@ -106,7 +106,7 @@ inject_faults() {
     for bench in "${!BENCHMARKS[@]}";
     do
         #bench=${benchmarks[$i]}
-        conf="${BENCHMARKS[$bench]}"
+        conf=${cfc}/"${BENCHMARKS[$bench]}"
 
         echo "Step 1 - Profiling $bench for fault injection"
         ./app_profiler.py -c ${conf}
