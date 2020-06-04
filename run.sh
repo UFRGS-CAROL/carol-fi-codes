@@ -4,10 +4,11 @@ set -e
 
 #uncomment to a more verbose script
 #set -x
+FAULTS=2000
 
 declare -A BENCHMARKS=( 
         ["lava_mp"]="${cfc}/lava_mp/float_dmr_none.conf"
-        ["gemm_tensorcores"]="${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf"
+        #["gemm_tensorcores"]="${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf"
         ["bfs"]="${cfc}/bfs/bfs.conf"
         ["accl"]="${cfc}/accl/accl.conf"
         ["mergesort"]="${cfc}/mergesort/mergesort.conf"
@@ -98,14 +99,12 @@ clean(){
 
 inject_faults() {
     
-    FAULTS=10
     cfc=carol-fi-codes
-            
+           
     cd ../
 
     for bench in "${!BENCHMARKS[@]}";
     do
-        #bench=${benchmarks[$i]}
         conf=${cfc}/"${BENCHMARKS[$bench]}"
 
         echo "Step 1 - Profiling $bench for fault injection"
@@ -113,10 +112,10 @@ inject_faults() {
 
 
         echo "Step 2 - Running ${FAULTS} on ${conf}"
-        #./fault_injector.py -i ${FAULTS} -c ${conf}
+        ./fault_injector.py -i ${FAULTS} -c ${conf}
 
-        #tar czf ${bench}_carolfi_2k.tar.gz *.csv /var/radiation-benchmarks/log/
-        #rm -rf /var/radiation-benchmarks/log/*.log logs/* *.csv
+        tar czf ${bench}_carolfi_2k.tar.gz *.csv /var/radiation-benchmarks/log/
+        rm -rf /var/radiation-benchmarks/log/*.log logs/* *.csv
     done
 
     cd -
