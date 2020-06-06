@@ -4,19 +4,19 @@ set -e
 
 #uncomment to a more verbose script
 #set -x
-FAULTS=2000
+FAULTS=1000
 
 declare -A BENCHMARKS=( 
-        ["lava_mp"]="${cfc}/lava_mp/float_dmr_none.conf"
-        #["gemm_tensorcores"]="${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf"
-        ["bfs"]="${cfc}/bfs/bfs.conf"
+#        ["lava_mp"]="${cfc}/lava_mp/float_dmr_none.conf"
+#        ["gemm_tensorcores"]="${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf"
+#        ["bfs"]="${cfc}/bfs/bfs.conf"
         ["accl"]="${cfc}/accl/accl.conf"
-        ["mergesort"]="${cfc}/mergesort/mergesort.conf"
-        ["quicksort"]="${cfc}/quicksort/quicksort.conf"
-        ["hotspot"]="${cfc}/hotspot/single_hotspot.conf"
-        ["gaussian"]="${cfc}/gaussian/gaussian.conf"
-        ["lud"]="${cfc}/lud/lud.conf"
-        ["nw"]="${cfc}/nw/nw.conf"
+#        ["mergesort"]="${cfc}/mergesort/mergesort.conf"
+#        ["quicksort"]="${cfc}/quicksort/quicksort.conf"
+#        ["hotspot"]="${cfc}/hotspot/single_hotspot.conf"
+#        ["gaussian"]="${cfc}/gaussian/gaussian.conf"
+#        ["lud"]="${cfc}/lud/lud.conf"
+#        ["nw"]="${cfc}/nw/nw.conf"
         )
 
 
@@ -139,5 +139,7 @@ case $1 in
         ;;
 
 esac
+
+sudo poweroff
 
 exit 0
