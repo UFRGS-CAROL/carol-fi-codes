@@ -10,7 +10,7 @@ declare -A BENCHMARKS=(
 #        ["lava_mp"]="${cfc}/lava_mp/float_dmr_none.conf"
 #        ["gemm_tensorcores"]="${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf"
 #        ["bfs"]="${cfc}/bfs/bfs.conf"
-        ["accl"]="${cfc}/accl/accl.conf"
+#        ["accl"]="${cfc}/accl/accl.conf"
 #        ["mergesort"]="${cfc}/mergesort/mergesort.conf"
 #        ["quicksort"]="${cfc}/quicksort/quicksort.conf"
 #        ["hotspot"]="${cfc}/hotspot/single_hotspot.conf"
@@ -114,7 +114,7 @@ inject_faults() {
         echo "Step 2 - Running ${FAULTS} on ${conf}"
         ./fault_injector.py -i ${FAULTS} -c ${conf}
 
-        tar czf ${bench}_carolfi_2k.tar.gz *.csv /var/radiation-benchmarks/log/
+        tar czf ${bench}_carolfi_${FAULTS}faults.tar.gz *.csv /var/radiation-benchmarks/log/
         rm -rf /var/radiation-benchmarks/log/*.log logs/* *.csv
     done
 
@@ -140,6 +140,6 @@ case $1 in
 
 esac
 
-sudo poweroff
+#sudo poweroff
 
 exit 0
