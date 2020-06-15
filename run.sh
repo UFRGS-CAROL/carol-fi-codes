@@ -4,7 +4,7 @@ set -e
 
 #uncomment to a more verbose script
 #set -x
-FAULTS=1000
+FAULTS=100 #0
 
 declare -A BENCHMARKS=( 
 #        ["lava_mp"]="${cfc}/lava_mp/float_dmr_none.conf"
