@@ -18,7 +18,7 @@ declare -A BENCHMARKS=(
 #        ["lud"]="${cfc}/lud/lud.conf"
 #        ["nw"]="${cfc}/nw/nw.conf"
 
-#        ["gemm"]="${cfc}/gemm/single_gemm_no_tensor.conf"
+        ["gemm_tensorcores"]="${cfc}/gemm/single_gemm_no_tensor.conf"
 #        ["darknet_v3"]="${cfc}/darknet_v3/single_darknet_v3_no_tensor.conf"
 #        ["py-faster-rcnn"]="${cfc}/gemm_tensorcores/py-faster-rcnn.conf"
 #        ["resnet_torch"]="${cfc}/gemm_tensorcores/resnet_torch.conf"
