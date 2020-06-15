@@ -8,7 +8,7 @@ FAULTS=1000
 
 declare -A BENCHMARKS=( 
 #        ["lava_mp"]="${cfc}/lava_mp/float_dmr_none.conf"
-#        ["gemm_tensorcores"]="${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf"
+#        ["mxm"]="${cfc}/gemm_tensorcores/single_mxm_no_tensor.conf"
 #        ["bfs"]="${cfc}/bfs/bfs.conf"
 #        ["accl"]="${cfc}/accl/accl.conf"
 #        ["mergesort"]="${cfc}/mergesort/mergesort.conf"
@@ -17,6 +17,12 @@ declare -A BENCHMARKS=(
 #        ["gaussian"]="${cfc}/gaussian/gaussian.conf"
 #        ["lud"]="${cfc}/lud/lud.conf"
 #        ["nw"]="${cfc}/nw/nw.conf"
+
+#        ["gemm"]="${cfc}/gemm/single_gemm_no_tensor.conf"
+#        ["darknet_v3"]="${cfc}/darknet_v3/single_darknet_v3_no_tensor.conf"
+#        ["py-faster-rcnn"]="${cfc}/gemm_tensorcores/py-faster-rcnn.conf"
+#        ["resnet_torch"]="${cfc}/gemm_tensorcores/resnet_torch.conf"
+
         )
 
 
